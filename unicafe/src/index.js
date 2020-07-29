@@ -13,6 +13,15 @@ const Button = ({onClick, name}) => {
   )
 }
 
+const Stat = ({feedback, number})  => {
+  return (
+    <tr>
+      <td>{feedback}</td>
+      <td>{number}</td>
+    </tr>
+  )
+}
+
 const Statistics = ({stats}) => {
   if (stats.sum === 0) {
     return (
@@ -20,20 +29,16 @@ const Statistics = ({stats}) => {
     )
   }
   return (
-    <div>
-      <Stat feedback='good' number={stats.good}/>
-      <Stat feedback='neutral' number={stats.neutral}/>
-      <Stat feedback='bad' number={stats.bad}/>
-      <Stat feedback='all' number={stats.sum}/>
-      <Stat feedback='average' number={stats.avg}/>
-      <Stat feedback='positive' number={stats.percentage}/>
-    </div>
-  )
-}
-
-const Stat = ({feedback, number})  => {
-  return (
-    <>{feedback} {number}<br/></>
+    <table>
+      <tbody>
+        <Stat feedback='good' number={stats.good}/>
+        <Stat feedback='neutral' number={stats.neutral}/>
+        <Stat feedback='bad' number={stats.bad}/>
+        <Stat feedback='all' number={stats.sum}/>
+        <Stat feedback='average' number={stats.avg}/>
+        <Stat feedback='positive' number={stats.percentage}/>
+      </tbody>
+    </table>
   )
 }
 
