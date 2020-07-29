@@ -15,12 +15,28 @@ const App = (props) => {
     setVotes(newVotes)
   }
 
+  const findMaxValueIndex = (array) => {
+    let index = 0
+    let max = array[0]
+    for (let i = 1; i < array.length; i++) {
+      if (array[i] > max) {
+        max = array[i]
+        index = i
+      }
+    }
+    return index
+  }
+
   return (
     <div>
+      <h1>Anecdote of the day</h1>
       {props.anecdotes[selected]}<br/>
       has {votes[selected]} votes<br/>
       <button onClick={addVote}>vote</button>
-      <button onClick={randomizeAnecdote}>next anecdote</button>
+      <button onClick={randomizeAnecdote}>next anecdote</button><br/>
+      <h1>Anecdote with most votes</h1>
+      {props.anecdotes[findMaxValueIndex(votes)]}<br/>
+      has {votes[findMaxValueIndex(votes)]} votes<br/>
     </div>
   )
 }
