@@ -13,6 +13,24 @@ const Button = ({onClick, name}) => {
   )
 }
 
+const Statistics = ({stats}) => {
+  if (stats.sum === 0) {
+    return (
+      <p>No feedback given</p>
+    )
+  }
+  return (
+    <div>
+      <Stat feedback='good' number={stats.good}/>
+      <Stat feedback='neutral' number={stats.neutral}/>
+      <Stat feedback='bad' number={stats.bad}/>
+      <Stat feedback='all' number={stats.sum}/>
+      <Stat feedback='average' number={stats.avg}/>
+      <Stat feedback='positive' number={stats.percentage}/>
+    </div>
+  )
+}
+
 const Stat = ({feedback, number})  => {
   return (
     <>{feedback} {number}<br/></>
@@ -39,6 +57,15 @@ const App = () => {
     return (good * 100) / getFeedbackSum() + ' %'
   }
 
+  const stats = {
+    good: good,
+    neutral: neutral,
+    bad: bad,
+    sum: getFeedbackSum(),
+    avg: getFeedbackAvg(),
+    percentage: getPositivePercentage()
+  }
+
   return (
     <div>
       <Header text='give feedback'/>
@@ -46,12 +73,7 @@ const App = () => {
       <Button onClick={() => setNeutral(neutral + 1)} name='neutral'/>
       <Button onClick={() => setBad(bad + 1)} name='bad'/>
       <Header text='statistics'/>
-      <Stat feedback='good' number={good}/>
-      <Stat feedback='neutral' number={neutral}/>
-      <Stat feedback='bad' number={bad}/>
-      <Stat feedback='all' number={getFeedbackSum()}/>
-      <Stat feedback='average' number={getFeedbackAvg()}/>
-      <Stat feedback='positive' number={getPositivePercentage()}/>
+      <Statistics stats={stats}/>
     </div>
   )
 }
